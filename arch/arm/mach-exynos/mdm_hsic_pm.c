@@ -410,7 +410,6 @@ void request_active_lock_release(const char *name)
 	}
 }
 
-
 void request_boot_lock_set(const char *name)
 {
 	struct mdm_hsic_pm_data *pm_data = get_pm_data_by_dev_name(name);
