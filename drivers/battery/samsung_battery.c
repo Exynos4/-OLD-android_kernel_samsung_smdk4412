@@ -63,7 +63,7 @@ static void battery_error_control(struct battery_info *info);
 unsigned int lpcharge;
 static int battery_get_lpm_state(char *str)
 {
-	if (strncmp(str, "charger", 7) == 0)
+	if (strncmp(str, "1", 1) == 0)
 		lpcharge = 1;
 
 	pr_info("%s: Low power charging mode: %d\n", __func__, lpcharge);
@@ -72,17 +72,17 @@ static int battery_get_lpm_state(char *str)
 }
 __setup("androidboot.mode=", battery_get_lpm_state);
 
-/* For JB bootloader compatibility */
+/* For KitKat bootloader compatibility */
 static int bootloader_get_lpm_state(char *str)
 {
-	if (strncmp(str, "1", 1) == 0)
+	if (strncmp(str, "charger", 7) == 0)
 		lpcharge = 1;
 
 	pr_info("%s: Low power charging mode: %d\n", __func__, lpcharge);
 
 	return lpcharge;
 }
-__setup("lpcharge=", bootloader_get_lpm_state);
+__setup("androidboot.mode=", bootloader_get_lpm_state);
 EXPORT_SYMBOL(lpcharge);
 
 #if defined(CONFIG_MACH_KONA)
