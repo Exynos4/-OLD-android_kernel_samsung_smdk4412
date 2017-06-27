@@ -236,7 +236,6 @@ static void mdm_silent_reset(void)
 			msecs_to_jiffies(MDM_BOOT_TIMEOUT))) {
 		mdm_drv->mdm_boot_status = -ETIMEDOUT;
 		pr_info("%s: mdm modem restart timed out.\n", __func__);
-		panic("%s[%p]: Failed to powerup!", __func__, current);
 	} else {
 		pr_info("%s: mdm modem has been restarted\n", __func__);
 
@@ -307,7 +306,6 @@ long mdm_modem_ioctl(struct file *filp, unsigned int cmd,
 		else {
 			pr_info("%s: ramdump collection completed\n", __func__);
 			mdm_drv->mdm_ram_dump_status = 0;
-			panic("CP Crash %s", mdm_read_err_report());
 		}
 		complete(&mdm_ram_dumps);
 		break;
